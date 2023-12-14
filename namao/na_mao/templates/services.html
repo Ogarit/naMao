@@ -1,0 +1,341 @@
+<html>
+{% load static %}
+<head>
+    <!-- Meta tags for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- External stylesheets and scripts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Title of the page -->
+    <title>Na Mão - Home</title>
+
+    <!-- Internal styles for the page -->
+    <style>
+        /* Styles for card box shadow effect */
+        .card-box-shadow {
+            border-radius: 3px;
+            box-shadow: 0px 0px 4px 1px #a4a4a5;
+            transition: box-shadow 0.3s;
+        }
+
+        .card-box-shadow:hover {
+            box-shadow: 0 0 4px 0px #8c8c8d, 4px 4px 30px 0px #8c8c8d;
+        }
+
+        /* Styles for custom filter button */
+        .custom-filter-btn {
+            border: 2px solid #dad3ff;
+            background-color: #dad3ff;
+            border-radius: 20px;
+            padding: 8px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .custom-btn {
+            border: 2px solid #dad3ff;
+            background-color: #dad3ff;
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 8px;
+        }
+
+        .custom-filter-btn.active {
+            background-color: #6b4eff;
+            color: #ffffff;
+        }
+
+        /* Styles for card container */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Styles for card */
+        .card {
+            width: 30rem;
+            margin: 0 1rem 1rem 0;
+            display: block;
+            background-color: #dad3ff;
+        }
+
+        .avatar-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .arrow-container {
+            width: 200px;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .arrow {
+            width: 6px;
+            height: 12px;
+            border: 1.50px #2D0C57 solid;
+        }
+
+        .user-info-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .user-details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-name {
+            color: #202325;
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 700;
+            line-height: 32px;
+            word-wrap: break-word;
+        }
+
+        .rating {
+            color: gold;
+            font-size: 30px;
+        }
+
+        /* Styles for links */
+        a:visited {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #cad1ca;
+            text-decoration: underline;
+        }
+
+        .image {
+          width: 100%;
+          max-width: 414px;
+          height: auto;
+          border-radius: 12px;
+        }
+
+        .info {
+          width: 100%;
+          max-width: 414px;
+          margin-top: 20px;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .title {
+          color: #202325;
+          font-size: 24px;
+          font-weight: 700;
+          line-height: 32px;
+          word-wrap: break-word;
+          margin-bottom: 5px;
+        }
+
+        .subtitle {
+          color: #979C9E;
+          font-size: 12px;
+          font-weight: 500;
+          line-height: 14px;
+          word-wrap: break-word;
+          margin-bottom: 5px;
+        }
+
+        .rating-container {
+          display: flex;
+          align-items: center;
+          margin-bottom: 10px;
+        }
+
+        .description {
+          color: black;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 20px;
+          word-wrap: break-word;
+          text-align: center;
+          margin-bottom: 20px;
+        }
+
+        .footer {
+          height: 10%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .button {
+          width: 100%;
+          max-width: 414px;
+          height: 48px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: #6B4EFF;
+          border-radius: 48px;
+          box-sizing: border-box;
+        }
+
+        .button-text {
+          text-align: center;
+          color: white;
+          font-size: 16px;
+          font-weight: 500;
+          line-height: 16px;
+          word-wrap: break-word;
+        }
+
+        .line {
+          width: 6px;
+          height: 12px;
+          border: 1.50px #2D0C57 solid;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(246, 245, 245, 1);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6b4eff; height: 80px">
+        <div class="container-fluid">
+            <!-- Brand/logo and toggle button for small screens -->
+            <a class="navbar-brand" style="color: #ffffff; text-decoration: none" href="{% url 'home' %}"><h3>Na Mão</h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">Serviços</a>
+                    </li>
+                </ul>
+
+                <!-- Conditional rendering of authentication links -->
+                {% if not auth %}
+                    <!-- Authentication links for non-authenticated users -->
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #dad3ff" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" style="color: #dad3ff" href="{% url 'register' %}">Cadastro</a>
+                        </li>
+                    </ul>
+                {% else %}
+                    <!-- Authentication links for authenticated users -->
+                    <ul class="navbar-nav justify-content-end">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" style="color: #6b4eff" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <div class="user-avatar">
+                                    <img src="{% if auth.avatar_url == null %} https://picsum.photos/200 {% else %} {{ auth.avatar_url }} {% endif %}" alt="User Avatar">
+                                </div>
+                            </a>
+
+                            <!-- Dropdown menu for authenticated users -->
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                <div class="container">
+                                    <div class="avatar-container">
+                                        <div class="arrow-container"></div>
+                                        <div class="user-info-container">
+                                            <div class="user-details">
+                                                <div class="user-name">{{ auth.name }}</div>
+                                                <div class="rating-container">
+                                                    <span class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+                                                </div>
+                                                <div>
+                                                    <span><i class="fa-regular fa-heart"></i> Favoritos</span>
+                                                </div>
+                                                <div>
+                                                    <a href="{% url 'new_services' %}"><i class="fa-solid fa-folder-plus"></i> Novo Serviço</a>
+                                                </div>
+                                                <div>
+                                                    <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    {% if service %}
+        <div class="container mt-4">
+            <div class="content" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center">
+                {% if service.images %}
+                    <!-- Display service image if available -->
+                    <img class="card-img-top" style="height: 240px; width: 414px" src="{{service.images.0.url}}" alt="Imagem Serviço">
+                {% else %}
+                    <!-- Display placeholder image if no service image is available -->
+                    <img class="card-img-top" style="height: 240px; width: 414px; padding: 5px" src="{% static 'images/sem_imagem.png' %}" alt="Imagem Serviço">
+                {% endif %}
+                <div class="info">
+                    <div class="title">{{ service.name }}</div>
+                    <div class="subtitle">{{ service.user.name }}</div>
+                </div>
+                <div class="description">
+                    {{ service.description }}<br>{{ service.observation }}
+                </div>
+                <div class="info">
+                    <div class="title">Preço: {{ service.price }}</div>
+                    <div class="title">Disconto: {{ service.discount }}%</div>
+                </div>
+            </div>
+            <div class="footer">
+                <div class="button">
+                    <div class="button-text">  Contratar   <i class="bi bi-cart"></i></div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="container">
+            <div class="content">
+                <div class="alert alert-danger justify-content-center" role="alert">
+                    Error
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

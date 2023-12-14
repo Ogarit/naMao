@@ -1,0 +1,274 @@
+<html>
+{% load static %}
+<head>
+    <!-- Meta tags for responsive design -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- External stylesheets and scripts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+    <!-- Title of the page -->
+    <title>Registrar Serviço</title>
+
+    <!-- Internal styles for the page -->
+    <style>
+        /* Styles for card box shadow effect */
+        .card-box-shadow {
+            border-radius: 3px;
+            box-shadow: 0px 0px 4px 1px #a4a4a5;
+            transition: box-shadow 0.3s;
+        }
+
+        .card-box-shadow:hover {
+            box-shadow: 0 0 4px 0px #8c8c8d, 4px 4px 30px 0px #8c8c8d;
+        }
+
+        /* Styles for custom filter button */
+        .custom-filter-btn {
+            border: 2px solid #dad3ff;
+            background-color: #dad3ff;
+            border-radius: 20px;
+            padding: 8px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .custom-btn {
+            border: 2px solid #dad3ff;
+            background-color: #dad3ff;
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 8px;
+        }
+
+        .custom-filter-btn.active {
+            background-color: #6b4eff;
+            color: #ffffff;
+        }
+
+        /* Styles for card container */
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Styles for card */
+        .card {
+            width: 30rem;
+            margin: 0 1rem 1rem 0;
+            display: block;
+            background-color: #dad3ff;
+        }
+
+        .avatar-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .arrow-container {
+            width: 200px;
+            padding: 10px;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .arrow {
+            width: 6px;
+            height: 12px;
+            border: 1.50px #2D0C57 solid;
+        }
+
+        .user-info-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .user-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .user-details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .user-name {
+            color: #202325;
+            font-size: 20px;
+            font-family: Inter;
+            font-weight: 700;
+            line-height: 32px;
+            word-wrap: break-word;
+        }
+
+        .rating {
+            color: gold;
+            font-size: 30px;
+        }
+
+        /* Styles for links */
+        a:visited {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #cad1ca;
+            text-decoration: underline;
+        }
+        #button1 {
+          text-align: center;
+        }
+
+        #button2 {
+          color: white;
+          background-color: rgba(108, 78, 255, 0.795);
+        }
+
+        button:hover {
+          transform: scale(1.03);
+          transition: all 0.7s;
+        }
+
+        #icon{
+          text-align: center;
+          font-size: 150px;
+          cursor: pointer;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(246, 245, 245, 1);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6b4eff; height: 80px">
+        <div class="container-fluid">
+            <!-- Brand/logo and toggle button for small screens -->
+            <a class="navbar-brand" style="color: #ffffff; text-decoration: none" href="{% url 'home' %}"><h3>Na Mão</h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'home' %}">Serviços</a>
+                    </li>
+                </ul>
+
+                <!-- Authentication links for authenticated users -->
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" style="color: #6b4eff" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <div class="user-avatar">
+                                <img src="{% if auth.avatar_url == null %} https://picsum.photos/200 {% else %} {{ auth.avatar_url }} {% endif %}" alt="User Avatar">
+                            </div>
+                        </a>
+
+                        <!-- Dropdown menu for authenticated users -->
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <div class="container">
+                                <div class="avatar-container">
+                                    <div class="arrow-container"></div>
+                                    <div class="user-info-container">
+                                        <div class="user-details">
+                                            <div class="user-name">{{ auth.name }}</div>
+                                            <div class="rating-container">
+                                                <span class="rating">&#9733;&#9733;&#9733;&#9734;&#9734;</span>
+                                            </div>
+                                            <div>
+                                                <span><i class="fa-regular fa-heart"></i> Favoritos</span>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'new_services' %}"><i class="fa-solid fa-folder-plus"></i> Novo Serviço</a>
+                                            </div>
+                                            <div>
+                                                <a href="{% url 'logout' %}"><i class="fa-solid fa-right-from-bracket"></i> Sair</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+       <div class="row align-items-center">
+            <div class="col-md-5 mx-auto cool-lg-5">
+                {% if message %}
+                    <div class="alert alert-sucess" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+                <form class="card-box-shadow p-4 p-md-5 rounded-5 bg-light" method="post" action="{% url 'new_services' %}">
+                    {% csrf_token %}
+
+                    <div id="icon">
+                        <i class="bi bi-folder-plus"></i>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-4" id="inputNomeService" name="name" placeholder="Nome do Serviço">
+                        <label for="inputNomeService">Nome do Serviço</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <textarea class="form-control rounded-4" id="Descri" name="description" placeholder="Descrição de Serviço" rows="3"></textarea>
+                        <label for="Descri">Descrição de Serviço</label>
+                    </div>
+
+                    <div class="preco form-floating mb-3">
+                        <input type="number" class="form-control rounded-4" name="price" id="inputPrice" placeholder="Senha">
+                        <label for="inputPrice">Preço (R$)</label>
+                    </div>
+
+                    <div class="desconto form-floating mb-3">
+                        <input type="number" class="form-control rounded-4" name="discount" id="inputDescont" placeholder="Senha">
+                        <label for="inputDescont">Desconto (%)</label>
+                    </div>
+
+                    <div class="form-floating mb-5">
+                        <select class="form-select rounded-4" id="inputSelect" name="category_id" aria-label="categorie-select">
+                            <option selected>Categorias</option>
+                            {% for category in categories %}
+                                <option value="{{ category.id }}">{{ category.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div id="button1">
+                        <button id="button2" type="submit" class="mb-3 btn w-50 btn-lg rounded-5">Salvar</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+   </div>
+
+    <!-- Bootstrap JavaScript bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+
+</html>

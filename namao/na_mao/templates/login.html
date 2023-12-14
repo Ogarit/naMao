@@ -1,0 +1,149 @@
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/c2eaecad4c.js"></script>
+    <title>Login</title>
+    <style>
+        .card-box-shadow {
+            border-radius: 3px;
+            box-shadow: 0px 0px 4px 1px #a4a4a5;
+            transition: box-shadow 0.3s;
+        }
+
+        .card-box-shadow:hover {
+            box-shadow: 0 0 4px 0px #8c8c8d, 4px 4px 30px 0px #8c8c8d;
+        }
+
+        #button1 {
+            text-align: center;
+        }
+
+        #button2 {
+            background-color: rgba(108, 78, 255, 0.795);
+        }
+
+        button:hover {
+            transform: scale(1.03);
+            transition: all 0.7s;
+        }
+
+        #esqueceu {
+            position: relative;
+            text-align: right;
+            bottom: 5%;
+        }
+
+        #dp {
+            text-align: center;
+            position: relative;
+        }
+
+        #icon {
+            text-align: center;
+            font-size: 150px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        a:link {
+            color: #72777a;
+            text-decoration: none;
+        }
+
+        a:visited {
+            color: #999999;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: #000000;
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: #cad1ca;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body style="background-color: rgba(246, 245, 245, 1);">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #6b4eff; height: 80px">
+        <div class="container-fluid">
+            <a class="navbar-brand" style="color:#ffffff; text-decoration:none" href="{% url 'home' %}"><h3>Na Mão</h3></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#conteudoNavbarSuportado" aria-controls="conteudoNavbarSuportado" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="conteudoNavbarSuportado">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #dad3ff" href="{% url 'home' %}">Serviços</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: #dad3ff" href="{% url 'register' %}">Cadastro</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row align-items-center">
+            <div class="col-md-5 mx-auto cool-lg-5">
+                {% if message %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% elif message_register %}
+                    <div class="alert alert-sucess" role="alert">
+                        {{ message_register }}
+                    </div>
+                {% endif %}
+                <form class="card-box-shadow p-4 p-md-5 rounded-5 bg-light" method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div id="icon">
+                        <i class='far fa-user-circle'></i>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control rounded-4" id="inputEmail" name="email" placeholder="E-mail">
+                        <label for="inputEmail">E-mail</label>
+                    </div>
+
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control rounded-4" id="inputPassword" name="password" placeholder="Senha">
+                        <label for="inputPassword">Senha</label>
+                    </div>
+
+                    <div id="esqueceu" class="mb-3">
+                        <a href="">Esqueceu a senha?</a>
+                    </div>
+
+                    <div id="button1">
+                        <button id="button2" type="submit" class="mb-3 btn w-50 btn-lg btn-success rounded-5">Login</button>
+                    </div>
+
+                    <div id="dp">
+                        <a href="{% url 'register' %}">Crie uma conta aqui!</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
